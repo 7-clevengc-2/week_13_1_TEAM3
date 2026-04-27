@@ -11,6 +11,10 @@ public class BookRepository {
     private final List<Book> books = new ArrayList<>();
 
     public void save(Book book) {
+        if (findByIsbn(book.getIsbn()).isPresent()) {
+            // Optionally, throw an exception or just return
+            return;
+        }
         books.add(book);
     }
 
