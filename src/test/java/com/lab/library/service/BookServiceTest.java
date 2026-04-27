@@ -51,8 +51,35 @@ class BookServiceTest {
         assertTrue(results.isEmpty());
     }
 
-    // TODO (Phase 4): Add a test for searchByTitle with a null query.
-    // Currently it throws NullPointerException — after your fix it should
-    // return an empty list. Ask your AI agent to help write this test.
+    @Test
+    void searchByTitle_nullQuery_returnsEmpty() {
+        List<?> results = service.searchByTitle(null);
+        assertEquals(0, results.size());
+    }
+
+    @Test
+    void searchByTitle_blankQuery_returnsEmpty() {
+        List<?> results = service.searchByTitle("   ");
+        assertEquals(0, results.size());
+    }
+
+    @Test
+    void checkOut_unknownIsbn_returnsFalse() {
+        assertFalse(service.checkOut("missing-isbn"));
+    }
+
+    @Test
+    void returnBook_unknownIsbn_returnsFalse() {
+        assertFalse(service.returnBook("missing-isbn"));
+    }
+
+    @Test
+    void addBook_duplicateIsbn_throwsException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> service.addBook("978-1", "Other Title", "Other Author")
+        );
+        assertTrue(exception.getMessage().contains("ISBN"));
+    }
 
 }

@@ -3,6 +3,7 @@ package com.lab.library.service;
 import com.lab.library.model.Book;
 import com.lab.library.repository.BookRepository;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 public class BookService {
@@ -49,8 +50,12 @@ public class BookService {
 
   
     public List<Book> searchByTitle(String query) {
+        if (query == null || query.isBlank()) {
+            return List.of();
+        }
+        String normalizedQuery = query.toLowerCase(Locale.ROOT);
         return repository.findAll().stream()
-                .filter(b -> b.getTitle().toLowerCase().contains(query.toLowerCase()))
+                .filter(b -> b.getTitle().toLowerCase(Locale.ROOT).contains(normalizedQuery))
                 .toList();
     }
 
