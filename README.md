@@ -82,9 +82,9 @@ Prompt your AI tool:
 
 | | Your notes |
 |---|---|
-| One thing AI did well | |
-| One thing AI got wrong or missed | |
-| Did AI's test pass without changes? | Yes / No / Needed edits |
+| One thing AI did well | |AI, when given the correct file for context, was able to pinpoint bugs well.
+| One thing AI got wrong or missed | |AI would make uneeded suggestions, especially if asked to pinpoint an issue in a file that did not have any issues.
+| Did AI's test pass without changes? | No, it needed edits. |
 
 ---
 
